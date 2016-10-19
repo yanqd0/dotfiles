@@ -1,6 +1,6 @@
 # dotfiles
 
-![progress](http://progressed.io/bar/5?title=developing)
+![progress](http://progressed.io/bar/10?title=developing)
 
 ## Description
 
