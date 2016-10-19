@@ -1,0 +1,36 @@
+" Move
+noremap <silent> j <C-d>
+noremap <silent> k <C-u>
+noremap <silent> J 10j
+noremap <silent> K 10k
+noremap <silent> h <C-p>
+noremap <silent> l <C-n>
+noremap <silent> zh 10h
+noremap <silent> zl 10l
+noremap <silent> zH 50h
+noremap <silent> zL 50l
+noremap <silent> v <PageDown>
+noremap <silent> x <PageUp>
+" Toggle javascript enable or not
+noremap ,js :setlocal! javascript.enabled!<CR>:setlocal! javascript.enabled?<CR>
+
+autocmd Fullscreen .* :set gui=set gui=nobookmarks,notabs,navigation
+
+highlight Hint::after content: attr(number); font-size:13pt
+highlight Normal color: black; background: white; font-size:14pt
+
+set editor='/usr/local/bin/mvim -g -f'
+set hintchars=abcdefghijklmnopqrstuvwxyz
+set nextpattern+=s*下一页|下一张|next|下一篇|下一頁|后一页|下页|后页s*
+set previouspattern+=s*上一页|上一张|prev|上一篇|上一頁|上页|前一页|前页s*
+set visualbell
+set showstatuslinks=1
+set focuscontent
+set statuslinevisibility=visible
+
+" Fix the missed completion support for new pages.
+js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search;1?name=unifiedcomplete"
+
+source! ~/.vimperatorrc.local
+
+" vim: set ft=vimperator:
