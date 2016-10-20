@@ -35,13 +35,6 @@ set statuslinevisibility=visible
 set visualbell
 " }}}
 
-" autocmd {{{
-autocmd Fullscreen .* :set gui=set gui=nobookmarks,notabs,navigation
-" }}}
-
-" Fix the missed completion support for new pages.
-" js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search;1?name=unifiedcomplete"
-
 " vim: set ft=vimperator:
 " vim: set shiftwidth=4 softtabstop=-1 expandtab foldmethod=marker:
 " vim: set textwidth=100 colorcolumn=100:
