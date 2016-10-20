@@ -1,6 +1,6 @@
 # dotfiles
 
-[![progress](http://progressed.io/bar/15?title=developing)](https://commons.wikimedia.org/wiki/File:PD-icon.svg)
+![progress](http://progressed.io/bar/20?title=developing)
 
 ## Description
 
@@ -10,7 +10,7 @@ It's not recommended to use it directly.
 
 ## License
 
-![Unlicense](https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/120px-PD-icon.svg.png)
+[![Unlicense](https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/120px-PD-icon.svg.png)](https://commons.wikimedia.org/wiki/File:PD-icon.svg)
 
 This project is under the term of the **Unlicense**.
 
