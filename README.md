@@ -1,6 +1,6 @@
 # dotfiles
 
-![progress](http://progressed.io/bar/10?title=developing)
+[![progress](http://progressed.io/bar/15?title=developing)](https://commons.wikimedia.org/wiki/File:PD-icon.svg)
 
 ## Description
 
