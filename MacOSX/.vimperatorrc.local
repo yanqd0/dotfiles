@@ -25,7 +25,7 @@ noremap ,js :setlocal! javascript.enabled!<CR>:setlocal! javascript.enabled?<CR>
 " }}}
 
 " set * {{{
-set editor='gvim -f'
+set editor='/usr/local/bin/mvim -f'
 set focuscontent
 set hintchars=abcdefghijklmnopqrstuvwxyz
 set nextpattern+=s*下一页|下一张|next|下一篇|下一頁|后一页|下页|后页s*
@@ -33,6 +33,7 @@ set previouspattern+=s*上一页|上一张|prev|上一篇|上一頁|上页|前�
 set showstatuslinks=1
 set statuslinevisibility=visible
 set visualbell
+set newtaburl=about:newtab
 " }}}
 
 " autocmd {{{
