@@ -18,6 +18,7 @@ noremap <silent> zH 50h
 noremap <silent> zL 50l
 noremap <silent> v <PageDown>
 noremap <silent> x <PageUp>
+noremap <silent> Y :js util.copyToClipboard(document.title)<CR>
 " }}}
 
 " Toggle javascript enabled. {{{
