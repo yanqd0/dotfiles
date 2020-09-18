@@ -11,20 +11,8 @@
             "priority": 10
           },
           {
-            "function": "powerline.segments.common.env.user",
-            "priority": 30
-          },
-          {
             "function": "powerline.segments.common.env.virtualenv",
             "priority": 50
-          },
-          {
-            "function": "powerline.segments.shell.cwd",
-            "args": {
-              "use_path_separator": true,
-              "dir_limit_depth": 8
-            },
-            "priority": 10
           },
           {
             "function": "powerline.segments.common.time.date",
@@ -37,6 +25,14 @@
           {
             "function": "powerline.segments.common.bat.battery",
             "priority": 40
+          },
+          {
+            "function": "powerline.segments.shell.cwd",
+            "args": {
+              "use_path_separator": true,
+              "dir_limit_depth": 8
+            },
+            "priority": 10
           },
           {
             "function": "powerline.segments.common.vcs.stash",
@@ -54,13 +50,6 @@
       }
     ],
     "left": [
-      {
-        "function": "powerline.segments.shell.mode"
-      },
-      {
-        "function": "powerline.segments.common.net.hostname",
-        "priority": 10
-      },
       {
         "function": "powerline.segments.common.env.user",
         "priority": 30
