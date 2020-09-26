@@ -23,10 +23,6 @@
             "priority": 40
           },
           {
-            "function": "powerline.segments.common.bat.battery",
-            "priority": 40
-          },
-          {
             "function": "powerline.segments.shell.cwd",
             "args": {
               "use_path_separator": true,
