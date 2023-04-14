@@ -2,6 +2,7 @@
   "segments": {
     "above": [
       {
+        "right": [],
         "left": [
           {
             "function": "powerline.segments.shell.mode"
@@ -11,16 +12,16 @@
             "priority": 10
           },
           {
-            "function": "powerline.segments.common.env.virtualenv",
-            "priority": 50
-          },
-          {
             "function": "powerline.segments.common.time.date",
             "args": {
               "istime": true,
               "format": "%Y-%m-%d %T"
             },
             "priority": 40
+          },
+          {
+            "function": "powerline.segments.common.env.virtualenv",
+            "priority": 50
           },
           {
             "function": "powerline.segments.shell.cwd",
@@ -45,6 +46,7 @@
         ]
       }
     ],
+    "right": [],
     "left": [
       {
         "function": "powerline.segments.common.env.user",
