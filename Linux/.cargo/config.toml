@@ -1,1 +1,39 @@
-/opt/yanqd0/dotfiles/Linux/.cargo/config.toml
+# ========== 镜像源 ==========
+[source.crates-io]
+replace-with = 'aliyun'
+
+[source.aliyun]
+registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
+
+# ========== 网络与下载优化 ==========
+[net]
+retry = 3                            # 下载失败自动重试次数
+git-fetch-with-cli = true            # 使用系统 git 克隆依赖（可充分利用 git 的代理/镜像配置）
+# 若需要配合 ghproxy 加速 GitHub 依赖，可在 git 全局配置中设置：
+# git config --global url."https://ghproxy.com/https://github.com/".insteadOf "https://github.com/"
+
+[http]
+multiplexing = true                  # 启用 HTTP/2 多路复用（默认开启）
+low-speed-limit = 10240              # 低于 10KB/s 视为慢速，超时会重试（单位：字节/秒）
+timeout = 30                         # 网络超时时间（秒）
+# 如果使用代理（例如 Clash/VPN），取消下面注释并改为实际地址：
+# proxy = "socks5://127.0.0.1:1080"
+
+# ========== 编译构建优化 ==========
+[build]
+# 增量编译（默认已开启，明确保留可避免意外关闭）
+incremental = true
+# 共享编译产物目录，避免在多项目间重复编译相同依赖
+# 通常设为系统临时目录或固定路径，这里以固定目录为例：
+target-dir = "/root/.cargo/target-cache"
+# 使用 sccache 缓存编译结果（需先安装 sccache 并配置）
+# rustc-wrapper = "sccache"
+
+# ========== 链接器优化（Linux/Windows 等） ==========
+# 使用更快的链接器可显著减少编译耗时，以 Linux 下使用 mold 为例：
+[target.x86_64-unknown-linux-gnu]
+linker = "clang"
+rustflags = [
+    "-C", "link-arg=-fuse-ld=mold",   # 使用 mold 链接器（需已安装 mold）
+    "-C", "link-arg=-Wl,--compress-debug-sections=zlib", # 压缩调试信息，减小二进制体积
+]
