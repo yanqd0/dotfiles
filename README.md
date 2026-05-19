@@ -18,6 +18,7 @@ It's not recommended to use it directly.
 | `.config/nvim/init.vim` | **本体** | *→ Linux* | — |
 | `.config/powerline/themes/shell/default.json` | **本体** | *→ Linux* | — |
 | `.config/powerline/themes/tmux/default.json` | **本体** | *→ Linux* | — |
+| `.config/yapf/style` | **本体** | *→ Linux* | — |
 | `.gemrc` | *→ MacOSX* | **本体** | — |
 | `.ideavimrc` | *→ MacOSX* | **本体** | — |
 | `.inputrc` | *→ MacOSX* | **本体** | — |
