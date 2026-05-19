@@ -15,10 +15,10 @@ It's not recommended to use it directly.
 | $HOME 路径 | Linux | MacOSX | Windows |
 |---|---|---|---|
 | `.cargo/config.toml` | *→ Windows* | *→ Windows* | **本体** |
-| `.config/nvim/init.vim` | **本体** | *→ Linux* | — |
-| `.config/powerline/themes/shell/default.json` | **本体** | *→ Linux* | — |
-| `.config/powerline/themes/tmux/default.json` | **本体** | *→ Linux* | — |
-| `.config/yapf/style` | **本体** | *→ Linux* | — |
+| `.config/nvim/init.vim` | *→ Windows* | *→ Windows* | **本体** |
+| `.config/powerline/themes/shell/default.json` | *→ Windows* | *→ Windows* | **本体** |
+| `.config/powerline/themes/tmux/default.json` | *→ Windows* | *→ Windows* | **本体** |
+| `.config/yapf/style` | *→ Windows* | *→ Windows* | **本体** |
 | `.gemrc` | *→ MacOSX* | **本体** | — |
 | `.ideavimrc` | *→ MacOSX* | **本体** | — |
 | `.inputrc` | *→ MacOSX* | **本体** | — |
