@@ -27,8 +27,7 @@ It's not recommended to use it directly.
 | `.pip/pip.conf` | *→ Windows* | *→ Windows* | — |
 | `.tmux.conf` | **本体** | *→ Linux* | — |
 | `.tmux.remote.conf` | **本体** | — | — |
-| `.vimperatorrc.local` | **本体** | **本体** | — |
-| `_vimperatorrc.local` | — | — | **本体** |
+
 | `pip/pip.ini` | — | — | **本体** |
 
 ## Strategy
