@@ -22,6 +22,7 @@ It's not recommended to use it directly.
 | `.gemrc` | *→ MacOSX* | **本体** | — |
 | `.ideavimrc` | *→ MacOSX* | **本体** | — |
 | `.inputrc` | *→ MacOSX* | **本体** | — |
+| `.isort.cfg` | *→ Windows* | *→ Windows* | **本体** |
 | `.ipython/profile_default/ipython_config.py` | **本体** | *→ Linux* | — |
 | `.npmrc` | *→ Windows* | *→ Windows* | **本体** |
 | `.pip/pip.conf` | *→ Windows* | *→ Windows* | — |
