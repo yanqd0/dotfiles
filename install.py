@@ -10,6 +10,14 @@ from pathlib import Path
 _OS_MAP = {"linux": "Linux", "win32": "Windows", "darwin": "MacOSX"}
 
 
+def _iter_files(src_dir):
+    """Yield (src_path, rel_path) for all files under src_dir, following symlinks."""
+    for root, _, files in os.walk(src_dir, followlinks=True):
+        for name in files:
+            src = Path(root) / name
+            yield src, src.relative_to(src_dir)
+
+
 def install_files(src_dir, dst_root):
     """Symlink all files under src_dir into dst_root.
 
@@ -18,11 +26,7 @@ def install_files(src_dir, dst_root):
     """
     installed = 0
 
-    for src in sorted(src_dir.rglob("*")):
-        if not src.is_file():
-            continue
-
-        rel = src.relative_to(src_dir)
+    for src, rel in sorted(_iter_files(src_dir), key=lambda x: x[1]):
         dst = dst_root / rel
 
         dst.parent.mkdir(parents=True, exist_ok=True)
@@ -51,11 +55,9 @@ def _validate(src_dir, dst_root):
     src_files = {}
     dst_files = {}
 
-    for src in sorted(src_dir.rglob("*")):
-        if not src.is_file():
-            continue
-        rel = src.relative_to(src_dir)
-        src_files[str(rel)] = src
+    for src, rel_path in sorted(_iter_files(src_dir), key=lambda x: x[1]):
+        rel = str(rel_path)
+        src_files[rel] = src
 
     for f in sorted(dst_root.rglob("*")):
         if not f.is_symlink():
