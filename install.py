@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Install dotfiles from Linux/ into $HOME via symlinks."""
+"""Install dotfiles into $HOME via symlinks, auto-detecting the current OS."""
 
 import argparse
 import os
 import shutil
 import sys
 from pathlib import Path
+
+_OS_MAP = {"linux": "Linux", "win32": "Windows", "darwin": "MacOSX"}
 
 
 def install_files(src_dir, dst_root):
@@ -135,8 +137,18 @@ def _run_test(src_dir):
 
 
 def main():
-    """Symlink all files under Linux/ into $HOME."""
+    """Symlink dotfiles into $HOME.
+
+    Auto-detects OS to pick the right source directory.
+    """
+    os_name = _OS_MAP.get(sys.platform, 'Unknown')
     parser = argparse.ArgumentParser(description=main.__doc__)
+    parser.add_argument(
+        "--os",
+        choices=sorted(_OS_MAP.values()),
+        default=os_name,
+        help=f"source directory name (default: {os_name or 'unknown'})",
+    )
     parser.add_argument(
         "--root",
         "-r",
@@ -157,14 +169,20 @@ def main():
     )
     args = parser.parse_args()
 
-    src_dir = Path(__file__).resolve().parent / "Linux"
+    if not args.os:
+        print(f"Unsupported platform: {sys.platform}", file=sys.stderr)
+        print(
+            "Use --os to specify 'Linux', 'Windows', or 'MacOSX'.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    src_dir = Path(__file__).resolve().parent / args.os
     if not src_dir.is_dir():
         print(f"Source directory not found: {src_dir}", file=sys.stderr)
         sys.exit(1)
 
-    root = Path(args.root).expanduser()
-    dst_root = root
-
+    dst_root = Path(args.root).expanduser()
     if args.test:
         _run_test(src_dir)
     elif args.revert:
