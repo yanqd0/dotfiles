@@ -1,0 +1,8 @@
+index-url = "https://mirrors.aliyun.com/pypi/simple/"
+compile-bytecode = true
+native-tls = true
+link-mode = "copy"
+
+python-install-mirror = "https://mirror.nju.edu.cn/github-release/indygreg/python-build-standalone/"
+
+# concurrent-downloads = 16

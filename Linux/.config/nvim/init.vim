@@ -1,0 +1,1 @@
+../../../Windows/.config/nvim/init.vim
