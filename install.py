@@ -112,7 +112,14 @@ def _validate(src_dir, dst_root):
 
 
 def _revert(src_dir, dst_root):
-    """Remove symlinks that point to src_dir or broken.
+    """Remove symlinks that point into this project.
+
+    Walks dst_root without following directory symlinks to avoid
+    entering the project tree and causing hangs or accidental
+    modification of project files.  Directory symlinks that resolve
+    into the project (legacy artefacts from older installs) are
+    removed; file symlinks that resolve into the project are skipped
+    (they are project files managed by git).
 
     Return count removed.
     """
@@ -121,13 +128,62 @@ def _revert(src_dir, dst_root):
         return 0
 
     removed = 0
-    for f in sorted(dst_root.rglob("*"), reverse=True):
-        if f.is_symlink():
+    seen = set()
+
+    for root, dirs, files in os.walk(dst_root, followlinks=False):
+        # Directory symlinks — if they resolve into the project they
+        # are legacy install artefacts and should be removed.
+        for name in dirs:
+            f = Path(root) / name
+            if not f.is_symlink():
+                continue
+            ours = False
+            try:
+                f.resolve().relative_to(src_dir.parent)
+                ours = True  # resolves into project — legacy dir link
+            except (ValueError, RuntimeError, OSError):
+                target = os.readlink(f)
+                if str(src_dir) in target:
+                    ours = True  # target string references project
+            if not ours:
+                continue
+            rel = f.relative_to(dst_root)
+            if rel not in seen:
+                seen.add(rel)
+                print(f"  remove: {rel} (dir link)")
+                f.unlink()
+                removed += 1
+
+        # File symlinks — only remove those whose target string
+        # references the source directory.  (followlinks=False already
+        # prevents os.walk from reaching project files via dir symlinks,
+        # so no resolve guard is needed here.)
+        for name in files:
+            f = Path(root) / name
+            if not f.is_symlink():
+                continue
             target = os.readlink(f)
-            if str(src_dir) in target or not f.exists():
+            if str(src_dir) in target:
                 rel = f.relative_to(dst_root)
+                if rel in seen:
+                    continue
+                seen.add(rel)
                 print(f"  remove: {rel}")
                 f.unlink()
+                removed += 1
+
+    # Phase 2: remove known source-pair symlinks that os.walk may have
+    # missed (e.g. when the parent directory is a real dir but the
+    # symlink's parent resolved into the project via a dir symlink).
+    for src, rel_path in sorted(
+        _iter_files(src_dir), key=lambda x: x[1], reverse=True
+    ):
+        dst = dst_root / rel_path
+        if dst.is_symlink() and str(rel_path) not in seen:
+            target = os.readlink(dst)
+            if str(src_dir) in target:
+                print(f"  remove: {rel_path}")
+                dst.unlink()
                 removed += 1
 
     return removed
@@ -182,7 +238,8 @@ def main():
     action.add_argument(
         "--revert",
         action="store_true",
-        help="remove symlinks pointing to this repo, and broken symlinks",
+        help=
+        "remove symlinks pointing to this project (never deletes real files/dirs)",
     )
     args = parser.parse_args()
 
