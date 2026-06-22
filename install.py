@@ -29,6 +29,21 @@ def install_files(src_dir, dst_root):
     for src, rel in sorted(_iter_files(src_dir), key=lambda x: x[1]):
         dst = dst_root / rel
 
+        # If the parent directory resolves into the project tree (e.g.
+        # ~/.config/nvim is a symlink to Linux/.config/nvim), the file is
+        # already managed by git — skip to avoid overwriting project links.
+        dst_parent_real = None
+        try:
+            dst_parent_real = dst.parent.resolve()
+            dst_parent_real.relative_to(src_dir.parent)
+            print(f"  skip   : {rel} (parent dir in project)")
+            continue
+        except (ValueError, RuntimeError, OSError):
+            # ValueError: not under project — safe to manage
+            # RuntimeError/OSError: symlink resolution failed — proceed with
+            #   caution (the checks below will handle missing/broken paths).
+            pass
+
         dst.parent.mkdir(parents=True, exist_ok=True)
 
         if dst.is_symlink():
