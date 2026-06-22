@@ -25,7 +25,7 @@ timeout = 30                         # 网络超时时间（秒）
 incremental = true
 # 共享编译产物目录，避免在多项目间重复编译相同依赖
 # 通常设为系统临时目录或固定路径，这里以固定目录为例：
-target-dir = "/root/.cargo/target-cache"
+# target-dir = "/tmp/.cargo/target-cache"
 # 使用 sccache 缓存编译结果（需先安装 sccache 并配置）
 # rustc-wrapper = "sccache"
 
