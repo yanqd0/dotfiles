@@ -18,9 +18,12 @@ compile-bytecode = true
 # 可选值: true | false
 native-tls = true
 
-# 虚拟环境中包的链接方式。copy 兼容性最好，适合跨文件系统或 WSL 场景。
+# 虚拟环境中包的链接方式。hardlink 快且几乎不占额外磁盘，
+# cache clean 只删缓存侧引用，不影响已装环境（symlink 则会悬空，官方不推荐）。
+# 跨文件系统场景（如 WSL /mnt/c、Docker cache mount）hardlink 不可用时 uv 会警告并回退，
+# 可在该环境用 UV_LINK_MODE=copy 局部覆盖，无需全局写死。
 # 可选值: clone | copy | hardlink | symlink
-link-mode = "copy"
+link-mode = "hardlink"
 
 # Python 解释器下载镜像，uv python install 时从该地址拉取。
 # 当前: npmmirror（阿里）
