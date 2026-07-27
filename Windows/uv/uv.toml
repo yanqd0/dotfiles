@@ -18,10 +18,11 @@ extra-index-url = ["https://pypi.org/simple/"]
 # 可选值: true | false
 compile-bytecode = true
 
-# 使用系统原生 TLS 库（OpenSSL/Schannel/Security.framework）替代 rustls，
+# 使用系统原生 TLS 证书（替代 uv 内置的 Mozilla 根证书），
 # 可避免部分企业防火墙或代理环境下的证书兼容问题。
+# 对应已废弃的 native-tls 选项，底层使用 rustls-platform-verifier。
 # 可选值: true | false
-native-tls = true
+system-certs = true
 
 # 虚拟环境中包的链接方式。hardlink 快且几乎不占额外磁盘，
 # cache clean 只删缓存侧引用，不影响已装环境（symlink 则会悬空，官方不推荐）。
