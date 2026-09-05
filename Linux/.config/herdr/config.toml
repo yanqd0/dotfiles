@@ -1,0 +1,15 @@
+onboarding = false
+[ui.toast]
+delivery = "herdr"
+
+[ui]
+show_agent_labels_on_pane_borders = true
+status_indicators = "dots"
+
+[terminal]
+default_shell = "/bin/bash"
+shell_mode = "non_login"
+
+[theme]
+name = "catppuccin"
+auto_switch = false
